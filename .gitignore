@@ -1,0 +1,7 @@
+.DS_Store
+credentials.json
+error_log.txt
+secrets.json
+secret*
+*__init__*
+*__pycache__*

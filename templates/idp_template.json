@@ -1,0 +1,71 @@
+{
+	"type": "OIDC",
+	"issuerMode": "{{issuer_mode}}",
+	"name": "{{idp_name}}",
+	"status": "ACTIVE",
+	"protocol": {
+		"type": "OIDC",
+		"endpoints": {
+			"authorization": {
+				"url": "{{okta_idp_domain}}/oauth2/default/v1/authorize",
+				"binding": "HTTP-REDIRECT"
+			},
+			"token": {
+				"url": "{{okta_idp_domain}}/oauth2/default/v1/token",
+				"binding": "HTTP-POST"
+			},
+			"userInfo": {
+				"url": "{{okta_idp_domain}}/oauth2/default/v1/userinfo",
+				"binding": "HTTP-REDIRECT"
+			},
+			"jwks": {
+				"url": "{{okta_idp_domain}}/oauth2/default/v1/keys",
+				"binding": "HTTP-REDIRECT"
+			}
+		},
+		"scopes": [
+			"profile",
+			"email",
+			"openid"
+		],
+		"issuer": {
+			"url": "{{okta_idp_domain}}/oauth2/default"
+		},
+		"credentials": {
+			"client": {
+				"client_id": "{{client_id}}",
+				"client_secret": "{{client_secret}}"
+			}
+		}
+	},
+	"policy": {
+		"provisioning": {
+			"action": "AUTO",
+			"profileMaster": true,
+			"conditions": {
+				"deprovisioned": {
+					"action": "NONE"
+				},
+				"suspended": {
+					"action": "NONE"
+				}
+			},
+			"groups": {
+				"action": "NONE"
+			}
+		},
+		"accountLink": {
+			"filter": null,
+			"action": "AUTO"
+		},
+		"subject": {
+			"userNameTemplate": {
+				"template": "idpuser.email"
+			},
+			"filter": null,
+			"matchType": "USERNAME",
+			"matchAttribute": ""
+		},
+		"maxClockSkew": 0
+	}
+}

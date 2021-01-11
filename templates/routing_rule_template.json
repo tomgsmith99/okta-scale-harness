@@ -1,0 +1,45 @@
+{
+	"type": "IDP_DISCOVERY",
+	"name": "{{rr_name}}",
+	"priority": "{{priority}}",
+	"system": false,
+	"conditions": {
+	    "network": {
+	        "connection": "ANYWHERE"
+	    },
+	    "platform": {
+	        "include": [
+	            {
+	                "type": "ANY",
+	                "os": {
+	                    "type": "ANY"
+	                }
+	            }
+	        ],
+	        "exclude": []
+	    },
+	    "userIdentifier": {
+	        "patterns": [
+	            {
+	                "matchType": "SUFFIX",
+	                "value": "{{domain}}"
+	            }
+	        ],
+	        "type": "IDENTIFIER"
+	    },
+	    "app": {
+	        "include": [],
+	        "exclude": []
+	    }
+	},
+	"actions": {
+	    "idp": {
+	        "providers": [
+	            {
+	                "type": "OIDC",
+	                "id": "{{idp_id}}"
+	            }
+	        ]
+	    }
+	}
+}
